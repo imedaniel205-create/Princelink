@@ -59,7 +59,7 @@ function ButtonLink({to, children, secondary=false}:{to:string;children:ReactNod
 
 function Eyebrow({children,light=false}:{children:ReactNode;light?:boolean}) { return <div className={light ? 'eyebrow eyebrow-light' : 'eyebrow'}><span />{children}</div>; }
 
-function PageIntro({eyebrow,title,description}:{eyebrow:string;title:string;description:string}) {
+function PageIntro({eyebrow,title,description}:{eyebrow:string;title:ReactNode;description:string}) {
   return <section className="page-intro"><div className="container"><Eyebrow light>{eyebrow}</Eyebrow><h1>{title}</h1><p>{description}</p></div></section>;
 }
 
