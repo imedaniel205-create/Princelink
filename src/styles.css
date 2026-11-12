@@ -143,3 +143,24 @@ p,.intro-copy p,.section-heading>p,.why-grid>div>p,
   .hero-actions{flex-direction:column}
   .hero-actions .button{width:min(100%,520px);font-size:14px;min-height:60px}
 }
+
+/* Refined CTA sizing: 2px smaller, with stronger bold weight */
+.button{
+  font-size:11px;
+  font-weight:700;
+}
+.hero-actions .button{
+  font-size:clamp(11px,1.05vw,13px);
+  font-weight:700;
+}
+.nav-cta{
+  font-size:10px;
+  font-weight:700;
+}
+.form-submit{
+  font-size:11px;
+  font-weight:700;
+}
+@media(max-width:600px){
+  .hero-actions .button{font-size:12px}
+}
