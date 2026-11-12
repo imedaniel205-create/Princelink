@@ -71,7 +71,7 @@ function Home() {
       <div className="container hero-inner">
         <div className="hero-copy">
           <Eyebrow light>Business Management &amp; Consulting</Eyebrow>
-          <h1>Strategy.<br/>Structure.<br/><em>Sustainable growth.</em></h1>
+          <h1>STRATEGY.<br/>STRUCTURE.<br/><em>SUSTAINABLE GROWTH.</em></h1>
           <p>Princelink helps small and medium-sized businesses strengthen their management systems, improve operational efficiency and implement practical solutions for sustainable growth.</p>
           <div className="hero-actions"><ButtonLink to="/services">Explore our services</ButtonLink><ButtonLink to="/contact" secondary>Book a consultation</ButtonLink></div>
           <div className="hero-note"><span className="note-line"/><span>Advisory insight. Practical implementation.</span></div>
