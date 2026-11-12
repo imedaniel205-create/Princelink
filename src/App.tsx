@@ -5,7 +5,20 @@ import { challenges, process, services } from './data';
 
 const brandLine = 'STRATEGY. STRUCTURE. SUSTAINABLE GROWTH.';
 
-function Seo() {\n  const { pathname } = useLocation();\n  useEffect(() => {\n    const titles: Record<string, string> = { '/': 'Princelink | Business Management & Consulting', '/about': 'About Princelink | Stronger Business Foundations', '/services': 'Services | Princelink Business Consulting', '/approach': 'Our Approach | Princelink', '/insights': 'Insights | Princelink', '/contact': 'Contact Princelink | Business Management & Consulting' };\n    const descriptions: Record<string, string> = { '/': 'Princelink helps small and medium-sized businesses strengthen management systems, improve operational efficiency and implement practical solutions for sustainable growth.', '/about': 'Learn about Princelink and its practical approach to business management, organisational clarity and operational improvement.', '/services': 'Explore Princelink services in business process improvement, organisational structure, operations management and more.', '/approach': 'Discover the Princelink process: Diagnose, Strategise, Implement and Evaluate.', '/insights': 'Practical perspectives on business operations, management systems and organisational structure from Princelink.', '/contact': 'Contact Princelink to discuss business management, operational challenges and practical improvements.' };\n    document.title = titles[pathname] || 'Princelink | Business Management & Consulting';\n    let meta = document.querySelector('meta[name="description"]');\n    if (!meta) { meta = document.createElement('meta'); meta.setAttribute('name','description'); document.head.appendChild(meta); }\n    meta.setAttribute('content', descriptions[pathname] || descriptions['/']);\n  }, [pathname]);\n  return null;\n}\n\nfunction ScrollToTop() {
+function Seo() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const titles: Record<string, string> = { '/': 'Princelink | Business Management & Consulting', '/about': 'About Princelink | Stronger Business Foundations', '/services': 'Services | Princelink Business Consulting', '/approach': 'Our Approach | Princelink', '/insights': 'Insights | Princelink', '/contact': 'Contact Princelink | Business Management & Consulting' };
+    const descriptions: Record<string, string> = { '/': 'Princelink helps small and medium-sized businesses strengthen management systems, improve operational efficiency and implement practical solutions for sustainable growth.', '/about': 'Learn about Princelink and its practical approach to business management, organisational clarity and operational improvement.', '/services': 'Explore Princelink services in business process improvement, organisational structure, operations management and more.', '/approach': 'Discover the Princelink process: Diagnose, Strategise, Implement and Evaluate.', '/insights': 'Practical perspectives on business operations, management systems and organisational structure from Princelink.', '/contact': 'Contact Princelink to discuss business management, operational challenges and practical improvements.' };
+    document.title = titles[pathname] || 'Princelink | Business Management & Consulting';
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) { meta = document.createElement('meta'); meta.setAttribute('name','description'); document.head.appendChild(meta); }
+    meta.setAttribute('content', descriptions[pathname] || descriptions['/']);
+  }, [pathname]);
+  return null;
+}
+
+function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'auto' }); }, [pathname]);
   return null;
@@ -44,7 +57,7 @@ function ButtonLink({to, children, secondary=false}:{to:string;children:ReactNod
   return <Link className={secondary ? 'button button-outline' : 'button button-gold'} to={to}>{children}<ArrowUpRight size={16}/></Link>;
 }
 
-function Eyebrow({children,light=false}:{children:React.ReactNode;light?:boolean}) { return <div className={light ? 'eyebrow eyebrow-light' : 'eyebrow'}><span />{children}</div>; }
+function Eyebrow({children,light=false}:{children:ReactNode;light?:boolean}) { return <div className={light ? 'eyebrow eyebrow-light' : 'eyebrow'}><span />{children}</div>; }
 
 function PageIntro({eyebrow,title,description}:{eyebrow:string;title:string;description:string}) {
   return <section className="page-intro"><div className="container"><Eyebrow light>{eyebrow}</Eyebrow><h1>{title}</h1><p>{description}</p></div></section>;
