@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, Building2, Check, ChevronRight, ClipboardList, Compass, Layers3, Menu, Network, Settings2, Target, TrendingUp, Workflow, X } from 'lucide-react';
 import { challenges, process, services } from './data';
@@ -7,7 +7,7 @@ const brandLine = 'STRATEGY. STRUCTURE. SUSTAINABLE GROWTH.';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [pathname]);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'auto' }); }, [pathname]);
   return null;
 }
 
