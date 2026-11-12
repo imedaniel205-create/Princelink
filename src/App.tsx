@@ -101,6 +101,19 @@ function Home() {
 }
 
 function About() {
+  useEffect(() => {
+    const panels = document.querySelectorAll('.mv-panel');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    panels.forEach((panel) => observer.observe(panel));
+    return () => observer.disconnect();
+  }, []);
   return <><PageIntro eyebrow="About Princelink" title={<>Better management.<br/><em>Stronger foundations.</em></>} description="We support small and medium-sized businesses in strengthening the systems, structures and operations that keep business moving."/>
     <section className="section-pad"><div className="container intro-grid about-intro"><div className="intro-image-wrap"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85" alt="Colleagues collaborating around a table" loading="lazy"/><div className="image-caption"><span>OUR PURPOSE</span><strong>Make better ways<br/>of working possible.</strong></div></div><div className="intro-copy"><Eyebrow>Our company</Eyebrow><h2>Management that works in the <em>real world.</em></h2><p>Princelink is a business management and consulting company focused on helping small and medium-sized businesses operate with greater clarity, coordination and effectiveness.</p><p>Our work brings advisory thinking together with practical implementation. We help businesses understand their management challenges, shape relevant improvements and work through the changes needed to put those improvements into practice.</p></div></div></section>
     <section className="philosophy-section section-pad"><div className="container philosophy-grid"><div><Eyebrow light>Our philosophy</Eyebrow><h2>Good strategy needs<br/><em>strong structure.</em></h2></div><div><p className="large-copy">Sustainable business growth is supported by the everyday systems, decisions and working relationships that make an organisation effective.</p><p>We believe meaningful improvement begins with understanding how a business actually works. From there, practical recommendations and collaborative implementation can help establish stronger ways of operating.</p></div></div></section>
