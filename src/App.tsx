@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode, type ChangeEvent, type FormEvent } from 'react';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, Building2, Check, ChevronRight, ClipboardList, Compass, Layers3, Menu, Network, Settings2, Target, TrendingUp, Workflow, X } from 'lucide-react';
 import { challenges, process, services } from './data';
 
 const brandLine = 'STRATEGY. STRUCTURE. SUSTAINABLE GROWTH.';
 
-function ScrollToTop() {
+function Seo() {\n  const { pathname } = useLocation();\n  useEffect(() => {\n    const titles: Record<string, string> = { '/': 'Princelink | Business Management & Consulting', '/about': 'About Princelink | Stronger Business Foundations', '/services': 'Services | Princelink Business Consulting', '/approach': 'Our Approach | Princelink', '/insights': 'Insights | Princelink', '/contact': 'Contact Princelink | Business Management & Consulting' };\n    const descriptions: Record<string, string> = { '/': 'Princelink helps small and medium-sized businesses strengthen management systems, improve operational efficiency and implement practical solutions for sustainable growth.', '/about': 'Learn about Princelink and its practical approach to business management, organisational clarity and operational improvement.', '/services': 'Explore Princelink services in business process improvement, organisational structure, operations management and more.', '/approach': 'Discover the Princelink process: Diagnose, Strategise, Implement and Evaluate.', '/insights': 'Practical perspectives on business operations, management systems and organisational structure from Princelink.', '/contact': 'Contact Princelink to discuss business management, operational challenges and practical improvements.' };\n    document.title = titles[pathname] || 'Princelink | Business Management & Consulting';\n    let meta = document.querySelector('meta[name="description"]');\n    if (!meta) { meta = document.createElement('meta'); meta.setAttribute('name','description'); document.head.appendChild(meta); }\n    meta.setAttribute('content', descriptions[pathname] || descriptions['/']);\n  }, [pathname]);\n  return null;\n}\n\nfunction ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'auto' }); }, [pathname]);
   return null;
@@ -40,7 +40,7 @@ function Footer() {
   </footer>;
 }
 
-function ButtonLink({to, children, secondary=false}:{to:string;children:React.ReactNode;secondary?:boolean}) {
+function ButtonLink({to, children, secondary=false}:{to:string;children:ReactNode;secondary?:boolean}) {
   return <Link className={secondary ? 'button button-outline' : 'button button-gold'} to={to}>{children}<ArrowUpRight size={16}/></Link>;
 }
 
@@ -75,7 +75,7 @@ function Home() {
 
     <section className="challenges-section section-pad"><div className="container"><div className="section-heading split-heading"><div><Eyebrow>Business realities</Eyebrow><h2>The challenges that<br/><em>hold businesses back.</em></h2></div><p>As businesses evolve, the systems that once worked may need to evolve with them. These are common areas where clearer management and operational practices can make a difference.</p></div><div className="challenge-grid">{challenges.map((item,i)=><div className="challenge-item" key={item}><span>0{i+1}</span><p>{item}</p><ArrowUpRight size={17}/></div>)}</div></div></section>
 
-    <section className="services-section section-pad"><div className="container"><div className="section-heading section-heading-light"><Eyebrow light>What we do</Eyebrow><h2>Our expertise.<br/><em>Your business advantage.</em></h2><p>Practical management and operational solutions designed to help businesses function more effectively.</p></div><div className="service-grid">{services.map((s,i)=>{const icons=[Workflow,Network,Settings2,Layers3,TrendingUp,ClipboardList];const Icon=icons[i];return <Link className="service-card" to="/services" key={s.number}><div className="service-card-top"><span>{s.number}</span><Icon size={23}/></div><h3>{s.title}</h3><p>{s.short}</p><span className="card-link">Learn more <ArrowUpRight size={15}/></span></Link>})}</div><div className="services-foot"><span>Six areas of focus. One practical objective: better business operations.</span><Link className="text-link text-link-light" to="/services">View all services <ArrowRight size={16}/></Link></div></div></section>
+    <section className="services-section section-pad"><div className="container"><div className="section-heading section-heading-light"><Eyebrow light>What we do</Eyebrow><h2>Our expertise.<br/><em>Your business advantage.</em></h2><p>Practical management and operational solutions designed to help businesses function more effectively.</p></div><div className="service-grid">{services.map((s,i)=>{const icons=[Workflow,Network,Settings2,Layers3,TrendingUp,ClipboardList];const Icon=icons[i];return <Link className="service-card" to={`/services#service-${s.number}`} key={s.number}><div className="service-card-top"><span>{s.number}</span><Icon size={23}/></div><h3>{s.title}</h3><p>{s.short}</p><span className="card-link">Learn more <ArrowUpRight size={15}/></span></Link>})}</div><div className="services-foot"><span>Six areas of focus. One practical objective: better business operations.</span><Link className="text-link text-link-light" to="/services">View all services <ArrowRight size={16}/></Link></div></div></section>
 
     <section className="approach-section section-pad"><div className="container"><div className="section-heading split-heading"><div><Eyebrow>How we work</Eyebrow><h2>A practical approach to<br/><em>business improvement.</em></h2></div><p>We combine informed business assessment, strategic recommendations and practical implementation to help businesses make meaningful improvements.</p></div><div className="process-grid">{process.map((p,i)=><div className="process-item" key={p.number}><div className="process-number">{p.number}<span>{i===0?'—': '↗'}</span></div><h3>{p.title}</h3><p>{p.text}</p></div>)}</div><div className="approach-link"><Link className="text-link" to="/approach">Explore our approach <ArrowUpRight size={16}/></Link></div></div></section>
 
@@ -98,7 +98,7 @@ function About() {
 
 function Services() {
   return <><PageIntro eyebrow="Our services" title={<>Management expertise.<br/><em>Practical business impact.</em></>} description="Focused advisory and implementation support across the management systems, structures and operations that help businesses function effectively."/>
-    <section className="section-pad"><div className="container service-detail-list">{services.map((s,i)=><article className="service-detail" key={s.number}><div className="service-detail-number">{s.number}<span> / 06</span></div><div className="service-detail-main"><h2>{s.title}</h2><p className="large-copy">{s.detail}</p><div className="detail-columns"><div><h4>Business challenges addressed</h4><ul>{s.problems.map(p=><li key={p}>{p}</li>)}</ul></div><div><h4>What an engagement may involve</h4><p>{s.engagement}</p></div></div><Link className="text-link" to="/contact">Discuss this service <ArrowUpRight size={16}/></Link></div><div className="service-detail-icon">{[<Workflow/>,<Network/>,<Settings2/>,<Layers3/>,<TrendingUp/>,<ClipboardList/>][i]}</div></article>)}</div></section>
+    <section className="section-pad"><div className="container service-detail-list">{services.map((s,i)=><article className="service-detail" id={`service-${s.number}`} key={s.number}><div className="service-detail-number">{s.number}<span> / 06</span></div><div className="service-detail-main"><h2>{s.title}</h2><p className="large-copy">{s.detail}</p><div className="detail-columns"><div><h4>Business challenges addressed</h4><ul>{s.problems.map(p=><li key={p}>{p}</li>)}</ul></div><div><h4>What an engagement may involve</h4><p>{s.engagement}</p></div></div><Link className="text-link" to="/contact">Discuss this service <ArrowUpRight size={16}/></Link></div><div className="service-detail-icon">{[<Workflow/>,<Network/>,<Settings2/>,<Layers3/>,<TrendingUp/>,<ClipboardList/>][i]}</div></article>)}</div></section>
     <section className="final-cta"><div className="container final-cta-inner"><Eyebrow light>Start with a conversation</Eyebrow><h2>Let's find the right<br/><em>way forward.</em></h2><p>Tell us about your business and the management improvements you are considering.</p><ButtonLink to="/contact">Book a consultation</ButtonLink></div></section></>;
 }
 
@@ -116,8 +116,8 @@ function Insights() {
 function ContactForm() {
   const [status,setStatus] = useState<'idle'|'validated'>('idle');
   const [values,setValues] = useState({name:'',email:'',business:'',service:'',message:''});
-  function update(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) { setValues({...values,[e.target.name]:e.target.value}); setStatus('idle'); }
-  function submit(e:React.FormEvent<HTMLFormElement>) { e.preventDefault(); setStatus('validated'); }
+  function update(e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement>) { setValues({...values,[e.target.name]:e.target.value}); setStatus('idle'); }
+  function submit(e:FormEvent<HTMLFormElement>) { e.preventDefault(); setStatus('validated'); }
   return <form className="contact-form" onSubmit={submit}>
     <div className="form-row"><label>Full name<input name="name" value={values.name} onChange={update} required minLength={2} placeholder="Your full name"/></label><label>Email address<input type="email" name="email" value={values.email} onChange={update} required placeholder="you@company.com"/></label></div>
     <div className="form-row"><label>Business / organisation<input name="business" value={values.business} onChange={update} placeholder="Business name"/></label><label>Area of interest<select name="service" value={values.service} onChange={update}><option value="">Select a service</option>{services.map(s=><option key={s.number} value={s.title}>{s.title}</option>}<option value="General enquiry">General enquiry</option></select></label></div>
@@ -133,5 +133,5 @@ function Contact() {
 }
 
 export default function App() {
-  return <><ScrollToTop/><Header/><main><Routes><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/services" element={<Services/>}/><Route path="/approach" element={<Approach/>}/><Route path="/insights" element={<Insights/>}/><Route path="/contact" element={<Contact/>}/><Route path="*" element={<PageIntro eyebrow="Page not found" title={<>This page isn't<br/><em>available.</em></>} description="The page you are looking for may have moved or does not exist."/>}/></Routes></main><Footer/></>;
+  return <><Seo/><ScrollToTop/><Header/><main><Routes><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/services" element={<Services/>}/><Route path="/approach" element={<Approach/>}/><Route path="/insights" element={<Insights/>}/><Route path="/contact" element={<Contact/>}/><Route path="*" element={<PageIntro eyebrow="Page not found" title={<>This page isn't<br/><em>available.</em></>} description="The page you are looking for may have moved or does not exist."/>}/></Routes></main><Footer/></>;
 }
